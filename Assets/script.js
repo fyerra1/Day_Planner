@@ -1,56 +1,44 @@
 var today = moment();
+var addUserInput = $(".saveBtn")
+var timeBlocks = $(".description");
+
+// displays current time and date
 $("#currentDay").text(today.format("hA, MMM Do, YYYY"));
 
-var addUserInput = $(".saveBtn")
+// event listner for when add button is clicked
 addUserInput.on("click", captureInput)
 
+// function to capture user's input and store it/them is local storage
 function captureInput(e) {
-  console.log("yes");
   var init = e.target.parentElement;
-  console.log(init);
   var userInput = init.children[1].value;
-  console.log(userInput);
   var name = init.children[1].id;
-  console.log(name);
   localStorage.setItem(name, userInput)
-  
 }
 
-var timeBlocks = $(".description").toArray();
-console.log(timeBlocks);
-
+// function to display stored information
 function renderStoredInput() {
-  // var activity = localStorage.getItem("name")
-  // console.log(activity);
-  // var savedInputs = localStorage.getItem(name)
   for (var i = 0; i < timeBlocks.length; i++) {
     var matchBlock = timeBlocks[i].id;
     var textBlocks = timeBlocks[i];
     var savedInputs = localStorage.getItem(matchBlock);
-    console.log(savedInputs);
-    console.log(matchBlock);
-    console.log(textBlocks);
     textBlocks.textContent = savedInputs;
-
-} 
+  } 
 }
 
-function colorBlocking(e) {
-var hour = moment().hour();
-var startHour = 9
-var block = $(".textarea")
-console.log(hour);
-console.log(timeBlocks[0].id);
+// function to color-fill timeblocks based on hour of moment
+function colorBlocking() {
+  var hour = moment().hour();
+  var startHour = 9
 
+  for (var i = 0; i < timeBlocks.length; i++){
+    var plannerHour = startHour + i
 
-for (var i = 0; i < timeBlocks.length; i++){
-  console.log(plannerHour);
-  var plannerHour = startHour + i
-  if (hour > plannerHour) {
-    block.addClass("past")
-  } else if (plannerHour == hour){block.addClass("present")}
-  else {block.addClass("future")}
-}
+    if (hour > plannerHour) {
+    $(timeBlocks[i]).addClass("past")
+    } else if (plannerHour == hour){$(timeBlocks[i]).addClass("present")}
+    else {$(timeBlocks[i]).addClass("future")}
+  }
 }
 
 renderStoredInput();
