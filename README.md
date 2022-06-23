@@ -7,4 +7,4 @@ Screenshot of live page:
 
 
 Link to live page:
-https://fyerra1.github.io/Day_Planner/
+[https://fyerra1.github.io/Day_Planner/](https://fyerra1.github.io/Workday_Planner-THIRD_PARTY_API/)
